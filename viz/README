@@ -1,0 +1,5 @@
+to run viz:
+
+cd to viz directory
+start a python webserver using the following command: "python -m SimpleHTTPServer 8888"
+open browser and go to http://localhost:8888/
