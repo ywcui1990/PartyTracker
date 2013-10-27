@@ -17,16 +17,14 @@ def read_pew_txt(pew_txt, codebook_csv, fips_csv):
 
     # Read into dataframe.
 
-    pew = pd.read_csv('Pew.txt',delimiter=' ')
-
-
+    pew = pd.read_csv(pew_txt,delimiter=' ')
 
     pew['fips_county'] = pew.fips.apply(lambda code: code%1000 if code != NaN else NaN)
     pew[['state','fips','fips_county']][pew.fips_county.notnull()].sort('fips').tail(2)
 
     # A separate file with FIPS codes.  Use it to get state and county names.
 
-    fips = pd.read_csv('data/US_FIPS_Codes.csv')
+    fips = pd.read_csv(fips_csv)
 
     # Get the state names.
 
@@ -58,7 +56,7 @@ def read_pew_txt(pew_txt, codebook_csv, fips_csv):
     # Take a copy of the codes and meanings in CSV form drawn from the Merge Codebook PDF file, 
     #and merge its information with the pew data so we can see what the meanings of the values.
 
-    codes = pd.read_csv('data/Merge_Codebook.csv').groupby('column')
+    codes = pd.read_csv(codebook_csv).groupby('column')
     code_columns = dict(list(codes))
 
     # #### Do the merge.
