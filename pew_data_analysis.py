@@ -17,7 +17,7 @@ def read_pew_txt(pew_txt, codebook_csv, fips_csv):
 
     # Read into dataframe.
 
-    pew = pd.read_csv(pew_txt,delimiter=' ')
+    pew = pd.read_csv(pew_txt,delimiter=' ',dtype={'race':object,'hisp':object,'educ':object,'partyln':object,'party':object})
 
     pew['fips_county'] = pew.fips.apply(lambda code: code%1000 if code != NaN else NaN)
     pew[['state','fips','fips_county']][pew.fips_county.notnull()].sort('fips').tail(2)
